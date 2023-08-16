@@ -1,7 +1,8 @@
 import format from "pg-format";
-import { ArrayUser, NewUser, User } from "../../interfaces";
+import { ArrayUser, NewUser, PasswordOmite, User } from "../../interfaces";
 import { QueryConfig, QueryResult } from "pg";
 import { client } from "../../database";
+import { passwordOmitListSchema, passwordOmitSchema } from "../../schemas";
 
 export const createNewUser = async (payload: NewUser): Promise<User> =>{
     const newUserQuery: string = format(
@@ -16,7 +17,6 @@ export const createNewUser = async (payload: NewUser): Promise<User> =>{
 }
 
 export const loginUser = async (payload: NewUser): Promise<User> =>{
-    console.log("primeiro log");
     
     const loginUserQuery: string = format(
         `INSERT INTO "users" (%I) VALUES (%L)
@@ -31,19 +31,20 @@ export const loginUser = async (payload: NewUser): Promise<User> =>{
 
 
 
-export const listAllUsers = async (): Promise<ArrayUser> =>{
+export const listAllUsers = async (): Promise<Array<PasswordOmite>> =>{
     const listAllQuery: string = `SELECT * FROM "users"`
 
-    const listResult: QueryResult<User> = await client.query(listAllQuery)
-    return listResult.rows
+    const listResult: QueryResult<PasswordOmite> = await client.query(listAllQuery)
+    const users = listResult.rows
+    return passwordOmitListSchema.parse(users)
 }
 
-export const listSingleUser = async (id: string): Promise<User> =>{
+export const listSingleUser = async (id: string): Promise<PasswordOmite> =>{
     const listUserQuery: QueryConfig ={
         text: `SELECT * FROM "users" WHERE "id" = $1`,
         values: [id]
     }
 
     const listResult = await client.query(listUserQuery)
-    return listResult.rows[0]
+    return passwordOmitSchema.parse(listResult.rows[0])
 }

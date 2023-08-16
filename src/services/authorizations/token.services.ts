@@ -7,7 +7,7 @@ import { sign } from "jsonwebtoken";
 export const generateToken = async (payload: LoginUser ): Promise<Token> =>{
 
     const emailQuery: QueryConfig ={
-        text: `SELECT * FROM "users" WHERE "email" = $1`,
+        text: `SELECT * FROM "users" WHERE "email" = $1;`,
         values: [payload.email]
     }
 
@@ -23,7 +23,7 @@ export const generateToken = async (payload: LoginUser ): Promise<Token> =>{
     }
 
     const token: string = sign(
-       { email: user.email, admin: user.admin },
+       { name: user.name, admin: user.admin },
        process.env.SECRET_KEY!,
        { subject: user.id.toString(), expiresIn: process.env.EXPIRES_IN! }
     )

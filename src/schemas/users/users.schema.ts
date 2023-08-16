@@ -9,8 +9,8 @@ export const usersSchema = z.object({
 })
 
 export const newUserSchema = usersSchema.omit({id: true})
-export const updateUserSchema = newUserSchema.partial()
-
+export const passwordOmitSchema = usersSchema.omit({password: true})
+export const passwordOmitListSchema = passwordOmitSchema.array()
 export const loginSchema = usersSchema.pick({
     email: true,
     password: true,

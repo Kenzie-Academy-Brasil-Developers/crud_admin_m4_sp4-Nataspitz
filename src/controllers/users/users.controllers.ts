@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { createNewUser, generateToken, listAllUsers, listSingleUser, loginUser } from "../../services";
-import { Token } from "../../interfaces";
+import { passwordOmitSchema } from "../../schemas";
 
 export const createUserController = async (req: Request ,res: Response): Promise<Response> =>{
-    const { body } = req
-    return res.status(201).json(await createNewUser(body))
+    const create = await createNewUser(req.body)
+    const newBody = passwordOmitSchema.parse(create)
+    return res.status(201).json(newBody)
 }
 
 export const loginUserController = async (req: Request ,res: Response): Promise<Response> =>{

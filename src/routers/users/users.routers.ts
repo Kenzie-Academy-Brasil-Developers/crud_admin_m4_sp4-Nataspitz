@@ -6,7 +6,7 @@ import { createUserController, loginUserController, listAlluserController } from
 export const usersRoute: Router = Router()
 export const loginRoute: Router = Router()
 
-usersRoute.post("", validateBody(newUserSchema), verifyUserEmail, createUserController)
-loginRoute.post("", validateBody(loginSchema), loginUserController)
-usersRoute.get("", verifyToken, listAlluserController)
+usersRoute.post("/", validateBody(newUserSchema), verifyUserEmail, createUserController)
+loginRoute.post("/", validateBody(loginSchema), loginUserController)
+usersRoute.get("/", verifyToken, validatePermission, listAlluserController)
 usersRoute.get("/:id/courses", verifyUserId, verifyToken, validatePermission)
