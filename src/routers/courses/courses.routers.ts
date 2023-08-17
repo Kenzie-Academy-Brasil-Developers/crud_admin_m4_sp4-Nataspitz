@@ -1,14 +1,14 @@
 import { Router } from "express";
-import { validateBody, validatePermission, verifyToken } from "../../middlewares";
-import { createCourseController } from "../../controllers";
+import { validateBody, validatePermission, verifyIdsForRegister, verifyToken, verifyUserId } from "../../middlewares";
+import { cancelCourseController, createCourseController, listAllCoursesController, registrationCoursesController } from "../../controllers";
 import { newCourseSchema } from "../../schemas";
 
 export const cousersRoutes: Router = Router() 
 
-cousersRoutes.use(verifyToken, validatePermission)
+//cousersRoutes.use(verifyToken, validatePermission)
 
-cousersRoutes.post("", validateBody(newCourseSchema), createCourseController)
-cousersRoutes.get("")
-cousersRoutes.post("/:courseId/users/:userId")
-cousersRoutes.patch("/:courseId/users/:userId")
-cousersRoutes.delete("/courses/:id/users")
+cousersRoutes.post("/", verifyToken, validatePermission, validateBody(newCourseSchema), createCourseController)
+cousersRoutes.get("/", listAllCoursesController)
+cousersRoutes.get("/courses/:id/users")
+cousersRoutes.post("/:courseId/users/:userId", verifyToken, validatePermission ,verifyIdsForRegister, registrationCoursesController)
+cousersRoutes.delete("/:courseId/users/:userId", verifyToken, validatePermission, verifyIdsForRegister, cancelCourseController)

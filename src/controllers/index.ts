@@ -1,4 +1,9 @@
-import { createCourseController, listAllCoursesController } from "./courses/courses.controllers";
+import {
+  createCourseController,
+  listAllCoursesController,
+  registrationCoursesController,
+  cancelCourseController,
+} from "./courses/courses.controllers";
 import {
   ListSingleUserController,
   createUserController,
@@ -6,12 +11,13 @@ import {
   loginUserController,
 } from "./users/users.controllers";
 
-
 export {
   createUserController,
   listAlluserController,
   ListSingleUserController,
   loginUserController,
   createCourseController,
-  listAllCoursesController
+  listAllCoursesController,
+  registrationCoursesController,
+  cancelCourseController
 };

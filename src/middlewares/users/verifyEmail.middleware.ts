@@ -24,5 +24,5 @@ export const verifyUserEmail = async (req: Request, res: Response, next: NextFun
         throw new AppError("Email already registered", 409)
     }
 
-    next()
+      return  next()
 }

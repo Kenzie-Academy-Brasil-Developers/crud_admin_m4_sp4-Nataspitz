@@ -14,7 +14,7 @@ export const handleErrors  = (err: unknown, req: Request, res: Response, next: N
     }
 
     if (err instanceof JsonWebTokenError ) {
-        return res.status(401).json({ error: err.message });
+        return res.status(401).json({ message: err.message });
     }
 
     console.error(err)

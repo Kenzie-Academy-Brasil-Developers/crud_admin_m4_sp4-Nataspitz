@@ -6,7 +6,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction): vo
     const { authorization } = req.headers    
 
     if (!authorization) {
-        throw new AppError("Missing bearer token.", 401)
+        throw new AppError("Missing bearer token", 401)
     }
 
     const token: string = authorization.split(" ")[1]

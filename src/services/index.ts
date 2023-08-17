@@ -1,5 +1,10 @@
 import { generateToken } from "./authorizations/token.services";
-import { createNewCourse, listAllCourses } from "./courses/courses.services";
+import {
+  createNewCourse,
+  listAllCourses,
+  createCourseRegistration,
+  cancelCourse
+} from "./courses/courses.services";
 import {
   createNewUser,
   listAllUsers,
@@ -15,4 +20,6 @@ export {
   generateToken,
   createNewCourse,
   listAllCourses,
+  createCourseRegistration,
+  cancelCourse
 };

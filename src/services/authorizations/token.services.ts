@@ -15,11 +15,11 @@ export const generateToken = async (payload: LoginUser ): Promise<Token> =>{
     const user: User = result.rows[0]
 
     if (result.rowCount === 0) {
-        throw new AppError("Username or password is incorrect.", 401)
+        throw new AppError("Wrong email/password", 401)
     }
 
     if (user.password !== payload.password) {
-        throw new AppError("Username or password is incorrect.", 401)
+        throw new AppError("Wrong email/password", 401)
     }
 
     const token: string = sign(
