@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { cancelCourse, createCourseRegistration, createNewCourse, listAllCourses } from "../../services"
+import { cancelCourse, createCourseRegistration, createNewCourse, listAllCourses, listUsersByCourse } from "../../services"
 
 export const createCourseController = async (req: Request ,res: Response): Promise<Response> =>{
     const { body } = req
@@ -21,3 +21,10 @@ export const cancelCourseController = async (req: Request ,res: Response): Promi
     await cancelCourse(courseId, userId)
     return res.status(204).send() 
 }
+
+export const listUsersByCourseController = async (req: Request ,res: Response): Promise<Response> =>{
+    const { id } = req.params
+    return res.status(200).json(await listUsersByCourse(id))
+}
+
+

@@ -12,6 +12,7 @@ import {
   NewCourse,
   ArrayCourse,
   UpdateCourse,
+  CourseUser
 } from "./courses/courses.interface";
 
 export {
@@ -25,5 +26,6 @@ export {
   ArrayCourse,
   UpdateCourse,
   PasswordOmite,
-  UserCourse
+  UserCourse,
+  CourseUser
 };

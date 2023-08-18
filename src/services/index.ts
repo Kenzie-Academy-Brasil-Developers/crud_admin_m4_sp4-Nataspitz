@@ -3,7 +3,8 @@ import {
   createNewCourse,
   listAllCourses,
   createCourseRegistration,
-  cancelCourse
+  cancelCourse,
+  listUsersByCourse
 } from "./courses/courses.services";
 import {
   createNewUser,
@@ -22,5 +23,7 @@ export {
   createNewCourse,
   listAllCourses,
   createCourseRegistration,
-  cancelCourse
+  cancelCourse,
+  listCoursesByUser,
+  listUsersByCourse
 };

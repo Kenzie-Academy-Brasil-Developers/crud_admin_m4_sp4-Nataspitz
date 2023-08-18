@@ -10,4 +10,5 @@ export const validatePermission = (req: Request, res: Response, next: NextFuncti
     if (sub !== id) {
         throw new AppError("Insufficient permission", 403)
     }
+
 }

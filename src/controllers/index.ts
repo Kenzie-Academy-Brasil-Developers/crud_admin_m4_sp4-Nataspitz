@@ -3,6 +3,7 @@ import {
   listAllCoursesController,
   registrationCoursesController,
   cancelCourseController,
+  listUsersByCourseController
 } from "./courses/courses.controllers";
 import {
   ListSingleUserController,
@@ -21,5 +22,6 @@ export {
   listAllCoursesController,
   registrationCoursesController,
   cancelCourseController,
-  ListCoursesUserController
+  ListCoursesUserController,
+  listUsersByCourseController
 };

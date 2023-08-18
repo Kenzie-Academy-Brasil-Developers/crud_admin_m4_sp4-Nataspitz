@@ -1,8 +1,9 @@
 import format from "pg-format"
-import { ArrayCourse, Course, NewCourse } from "../../interfaces"
+import { ArrayCourse, Course, CourseUser, NewCourse } from "../../interfaces"
 import { QueryConfig, QueryResult } from "pg"
 import { client } from "../../database"
 import { promise } from "zod"
+import { AppError } from "../../errors/error"
 
 
 export const createNewCourse = async (payload: NewCourse): Promise<Course> =>{
@@ -43,4 +44,34 @@ export const cancelCourse = async (courseId: string, userId: string): Promise<vo
     }
 
     await client.query(cancelQuery)
+}
+
+export const listUsersByCourse = async (id: string): Promise<CourseUser[]> =>{
+    const listQuery: QueryConfig ={
+        text: `SELECT
+        uc."userId" AS "userId",
+        u."name" AS "userName",
+        uc."courseId" AS "courseId",
+        c."name" AS "courseName",
+        c."description" AS "courseDescription",
+        uc."active" AS "userActiveInCourse"
+        FROM
+        "userCourses" uc
+        JOIN
+        "users" u ON uc."userId" = u."id"
+        JOIN
+        "courses" c ON uc."courseId" = c."id"
+        WHERE
+        c."id" = $1;
+    `,
+    values: [id]
+    }
+
+    const result: QueryResult<CourseUser> = await client.query(listQuery)
+
+    if (result.rowCount === 0) {
+        throw new AppError("No course found", 404)
+    }
+    
+    return result.rows
 }
