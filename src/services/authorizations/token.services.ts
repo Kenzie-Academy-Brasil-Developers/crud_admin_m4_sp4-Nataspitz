@@ -3,6 +3,7 @@ import { LoginUser, Token, User } from "../../interfaces";
 import { client } from "../../database";
 import { AppError } from "../../errors/error";
 import { sign } from "jsonwebtoken";
+import { compare } from "bcryptjs";
 
 export const generateToken = async (payload: LoginUser ): Promise<Token> =>{
 
@@ -12,13 +13,15 @@ export const generateToken = async (payload: LoginUser ): Promise<Token> =>{
     }
 
     const result: QueryResult<User> = await client.query(emailQuery)
-    const user: User = result.rows[0]
-
+    
     if (result.rowCount === 0) {
         throw new AppError("Wrong email/password", 401)
     }
-
-    if (user.password !== payload.password) {
+    
+    const user: User = result.rows[0]
+    const passwordHash: boolean = await compare(payload.password, user.password)
+    
+    if (!passwordHash) {
         throw new AppError("Wrong email/password", 401)
     }
 

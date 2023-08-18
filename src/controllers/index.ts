@@ -9,6 +9,7 @@ import {
   createUserController,
   listAlluserController,
   loginUserController,
+  ListCoursesUserController
 } from "./users/users.controllers";
 
 export {
@@ -19,5 +20,6 @@ export {
   createCourseController,
   listAllCoursesController,
   registrationCoursesController,
-  cancelCourseController
+  cancelCourseController,
+  ListCoursesUserController
 };

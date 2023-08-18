@@ -10,6 +10,7 @@ import {
   listAllUsers,
   listSingleUser,
   loginUser,
+  listCoursesByUser
 } from "./users/users.services";
 
 export {

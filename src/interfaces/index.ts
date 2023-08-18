@@ -4,7 +4,8 @@ import {
   NewUser,
   LoginUser,
   Token,
-  PasswordOmite
+  PasswordOmite,
+  UserCourse
 } from "./users/users.interface";
 import {
   Course,
@@ -23,5 +24,6 @@ export {
   NewCourse,
   ArrayCourse,
   UpdateCourse,
-  PasswordOmite
+  PasswordOmite,
+  UserCourse
 };
