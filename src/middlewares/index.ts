@@ -1,6 +1,7 @@
 import { validatePermission } from "./authorizations/routersValidations.middleware";
 import { verifyToken } from "./authorizations/validateToken.middleware";
 import { verifyIdCoursForRegister } from "./courses/verifyCourseId.middleware";
+import { verifyIdCourse } from "./courses/verifyIdFromCourses.middleware";
 import { verifyIdUserForRegister } from "./courses/verifyUserd.middleware";
 import { verifyUserEmail } from "./users/verifyEmail.middleware";
 import { verifyUserId } from "./users/verifyId.middleware";
@@ -15,5 +16,6 @@ export {
   validatePermission,
   verifyUserLogin,
   verifyIdCoursForRegister,
-  verifyIdUserForRegister
+  verifyIdUserForRegister,
+  verifyIdCourse
 };
